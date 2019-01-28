@@ -18,4 +18,19 @@ export class ContactController{
         const contact = await Contact.findById(req.params.id);
         res.status(200).send({ contact, success: true })
     }
+
+    public async updateContact (req: Request, res: Response){
+        const contact = await Contact.findByIdAndUpdate(req.params.id, req.body, {new:true});
+        res.status(200).send({ contact, success: true })
+    }
+
+    public async deleteContact (req: Request, res: Response){
+        const contact = await Contact.findByIdAndRemove(req.params.id);
+        res.status(200).send({contact, success: true});
+    } 
+
+    public async deleteAllContacts (req: Request, res: Response){
+        await Contact.deleteMany();
+        res.status(200).send({success: true})
+    }
 }

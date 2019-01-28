@@ -75,4 +75,45 @@ describe('CRM routes', () => {
     });
                 
   });
+
+  it('tests PUT /contact/:id endpoint', (done) => {
+    let contact = {
+      firstname: 'Mohan',
+      lastname: 'Ghar',
+      email: 'rohan.dhar1992@gmail.com',
+      company: 'Coder',
+      phone: 9038097516
+    };
+    request(app).put('/contact/5bb9e79df82c0151fc0cd5c8')
+                .send(contact)
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end( (err, res)=> {
+                  expect(res.body.contact.firstname).toMatch('Mohan');
+                  done();
+                });
+  });
+
+  it('tests DELETE /contact/:id endpoint', (done)=>{
+      request(app).delete('/contact/5bb9e79df82c0151fc0cd5c8')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200)
+                .end( (err, res)=> {
+                  expect(res.body.success).toBeTruthy();
+                  done();
+                });
+  });
+
+  it('tests DELETE /contacts endpoint', (done)=>{
+    request(app).delete('/contacts')
+              .set('Accept', 'application/json')
+              .expect('Content-Type', /json/)
+              .expect(200)
+              .end( (err, res)=> {
+                expect(res.body.success).toBeTruthy();
+                done();
+              });
+})
 });

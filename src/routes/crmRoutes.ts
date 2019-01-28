@@ -18,9 +18,12 @@ export class Routes{
         .get(this.contactController.getContacts)
 
         // POST endpoint
-        .post(this.contactController.addNewContact);
+        .post(this.contactController.addNewContact)
+        .delete(this.contactController.deleteAllContacts);
 
         app.route('/contact/:id')
-        .get(this.contactController.getContact);
+        .get(this.contactController.getContact)
+        .put(this.contactController.updateContact)
+        .delete(this.contactController.deleteContact);
     }
 }
