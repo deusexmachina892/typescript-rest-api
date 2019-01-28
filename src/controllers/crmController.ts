@@ -13,4 +13,9 @@ export class ContactController{
         const contacts = await Contact.find({});
         res.status(200).send({ contacts, success: true});
     }
+
+    public async getContact (req: Request, res: Response) {
+        const contact = await Contact.findById(req.params.id);
+        res.status(200).send({ contact, success: true })
+    }
 }

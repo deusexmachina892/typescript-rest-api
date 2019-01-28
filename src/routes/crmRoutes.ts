@@ -8,7 +8,7 @@ export class Routes{
         app.route('/')
         .get((req: Request, res: Response) => {
             res.status(200).send({
-                message: 'success'
+                success: true
             });
         });
 
@@ -19,5 +19,8 @@ export class Routes{
 
         // POST endpoint
         .post(this.contactController.addNewContact);
+
+        app.route('/contact/:id')
+        .get(this.contactController.getContact);
     }
 }
