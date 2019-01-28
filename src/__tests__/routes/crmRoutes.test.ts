@@ -2,8 +2,12 @@ import "@babel/polyfill";
 
 import app from '../../app';
 import * as request from 'supertest';
+import { Contact } from '../../models/Contact';
 
 describe('CRM routes', () => {
+  beforeEach((done) => {
+    Contact.deleteMany().then(()=> done());
+  })
   it('tests GET / endpoint', async () =>{
     const result = await request(app).get('/');
     expect(result.body.message).toMatch('success');
